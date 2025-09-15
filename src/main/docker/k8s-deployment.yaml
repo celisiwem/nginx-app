@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-quarkus-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-quarkus
+  template:
+    metadata:
+      labels:
+        app: nginx-quarkus
+    spec:
+      containers:
+        - name: nginx
+          image: ghcr.io/<your-user>/nginx-quarkus-app:latest
+          ports:
+            - containerPort: 80
+        - name: quarkus
+          image: ghcr.io/<your-user>/nginx-quarkus-app:quarkus
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-quarkus-service
+spec:
+  selector:
+    app: nginx-quarkus
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
