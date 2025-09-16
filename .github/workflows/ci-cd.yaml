@@ -115,8 +115,8 @@ jobs:
       # ----------------------
       # Step 9: Deploy to Kubernetes (example)
       # ----------------------
-#      - name: Deploy to Kubernetes
-#        run: |
-#          kubectl apply -f src/main/docker/deployment.yaml
-#          kubectl apply -f src/main/docker/service.yaml
-#
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f src/main/docker/deployment.yaml
+          kubectl apply -f src/main/docker/service.yaml
+
