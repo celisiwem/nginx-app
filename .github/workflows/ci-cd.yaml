@@ -52,6 +52,7 @@ jobs:
       - name: Build & Push Docker Image
         run: |
           IMAGE=ghcr.io/celisiwem/quarkus-app:latest
+          
           docker build -t $IMAGE -f src/main/docker/Dockerfile .
           docker push $IMAGE
 
