@@ -1,0 +1,28 @@
+---
+- name: Deploy Quarkus App to Kubernetes
+  hosts: local
+  tasks:
+    - name: Ensure required Python packages are installed
+      pip:
+        name:
+          - kubernetes
+          - openshift
+          - pyyaml
+        state: present
+      vars:
+        ansible_python_interpreter: "{{ ansible_playbook_python }}"
+
+    - name: Apply Deployment
+      kubernetes.core.k8s:
+        state: present
+        src: ./deployment.yaml
+
+    - name: Apply Service
+      kubernetes.core.k8s:
+        state: present
+        src: ./service.yaml
+
+    - name: Apply Ingress
+      kubernetes.core.k8s:
+        state: present
+        src: ./ingress.yaml
