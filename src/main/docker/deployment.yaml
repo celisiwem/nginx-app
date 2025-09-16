@@ -14,6 +14,11 @@ spec:
     spec:
       containers:
         - name: quarkus-app
-          image: quarkus-app:latest
+          # <-- use full GHCR image path
+          image: ghcr.io/celisiwem/quarkus-app:latest
+          imagePullPolicy: Always     # use Always for :latest; use IfNotPresent for immutable tags
           ports:
             - containerPort: 8080
+      # if image is private you will need:
+      # imagePullSecrets:
+      #   - name: regcred
